@@ -7,13 +7,13 @@ function App() {
   const [count, setCount] = useState(0)
 
   const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null)
-  const [showInstallPrompt, setShowInstallPrompt] = useState(false)
+  // const [showInstallPrompt, setShowInstallPrompt] = useState(false)
 
   useEffect(() => {
     const handler = (e: any) => {
       e.preventDefault() // chặn trình duyệt tự hiển thị
       setDeferredPrompt(e)
-      setShowInstallPrompt(true) // bạn có thể hiện nút "Cài app" ở đây
+      // setShowInstallPrompt(true) // bạn có thể hiện nút "Cài app" ở đây
     }
 
     window.addEventListener('beforeinstallprompt', handler)
@@ -26,7 +26,7 @@ function App() {
     const { outcome } = await (deferredPrompt as any).userChoice
     console.log('User response to install prompt:', outcome)
     setDeferredPrompt(null)
-    setShowInstallPrompt(false)
+    // setShowInstallPrompt(false)
   }
 
 
