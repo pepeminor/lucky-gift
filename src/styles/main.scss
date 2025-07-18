@@ -1,0 +1,7 @@
+@import './safe-area';
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: #fff5f5;
+  @include safe-area;
+}
