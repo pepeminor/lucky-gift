@@ -33,10 +33,8 @@ function App() {
   return (
     <>
       <div>
-      <h1>LuckyGift</h1>
-      {showInstallPrompt && (
+        <h1>LuckyGift</h1>
         <button onClick={handleInstallClick}>🎁 Cài LuckyGift vào màn hình</button>
-      )}
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
