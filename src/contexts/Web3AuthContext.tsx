@@ -6,7 +6,7 @@ const clientId = "BBF90jYyWvLAeRMq-RhykdJsIjqBBP7g1424n55o-BdLgeUN1S2HYO2BC6O-37
 const web3AuthContextConfig: Web3AuthContextConfig = {
   web3AuthOptions: {
     clientId,
-    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   }
 };
 
