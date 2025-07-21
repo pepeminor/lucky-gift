@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import { useAccount, useBalance } from "wagmi";
@@ -13,13 +13,7 @@ function App() {
     address,
   });
 
-  const {
-    connect,
-    isConnected,
-    connectorName,
-    loading: connectLoading,
-    error: connectError,
-  } = useWeb3AuthConnect();
+  const { connect } = useWeb3AuthConnect();
 
   // const {
   //   disconnect,
