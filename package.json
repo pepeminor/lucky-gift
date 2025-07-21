@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@web3auth/base": "^9.7.0",
+    "@web3auth/modal": "^10.0.5",
+    "@web3auth/openlogin-adapter": "^8.12.4",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "wagmi": "^2.16.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

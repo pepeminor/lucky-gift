@@ -1,40 +1,45 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import { useAccount, useBalance } from "wagmi";
+import "./App.css";
+
+import { useWeb3AuthConnect, useWeb3AuthUser } from "@web3auth/modal/react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const { address } = useAccount();
+  const { data: balance } = useBalance({
+    address,
+  });
 
-  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null)
-  // const [showInstallPrompt, setShowInstallPrompt] = useState(false)
+  const {
+    connect,
+    isConnected,
+    connectorName,
+    loading: connectLoading,
+    error: connectError,
+  } = useWeb3AuthConnect();
 
-  useEffect(() => {
-    const handler = (e: any) => {
-      e.preventDefault() // chặn trình duyệt tự hiển thị
-      setDeferredPrompt(e)
-      // setShowInstallPrompt(true) // bạn có thể hiện nút "Cài app" ở đây
-    }
+  // const {
+  //   disconnect,
+  //   loading: disconnectLoading,
+  //   error: disconnectError,
+  // } = useWeb3AuthDisconnect();
+  const { userInfo } = useWeb3AuthUser();
 
-    window.addEventListener('beforeinstallprompt', handler)
-    return () => window.removeEventListener('beforeinstallprompt', handler)
-  }, [])
-
-  const handleInstallClick = async () => {
-    if (!deferredPrompt) return
-    ;(deferredPrompt as any).prompt()
-    const { outcome } = await (deferredPrompt as any).userChoice
-    console.log('User response to install prompt:', outcome)
-    setDeferredPrompt(null)
-    // setShowInstallPrompt(false)
-  }
-
+  console.log("userInfo", userInfo);
+  console.log("address", address);
 
   return (
     <>
       <div>
+        <button onClick={() => connect()} className="card">
+          Login
+        </button>
+        {address && <div className="card">Address: {address}</div>}
+        {balance && <div className="card">balance: {balance.value}</div>}
         <h1>LuckyGift</h1>
-        <button onClick={handleInstallClick}>🎁 Cài LuckyGift vào màn hình</button>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -55,7 +60,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
