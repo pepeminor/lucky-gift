@@ -10,6 +10,9 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
+      workbox: {
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
+      },
       includeAssets: ["favicon.ico"],
       manifest: {
         name: "LuckyGift",
