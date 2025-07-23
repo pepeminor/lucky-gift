@@ -24,11 +24,11 @@ export function QRScanner() {
           <QrReader
             constraints={{ facingMode: "environment" }}
             onResult={(result, error) => {
-              if (!!result) {
+              if (result) {
                 setScanResult(result.getText());
                 setOpenCamera(false); // đóng sau khi scan thành công
               }
-              if (!!error) {
+              if (error) {
                 console.error("QR Scan Error:", error);
               }
             }}
