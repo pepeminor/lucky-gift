@@ -4,7 +4,12 @@ import viteLogo from "/vite.svg";
 import { useAccount, useBalance } from "wagmi";
 import "./App.css";
 
-import { useWeb3AuthConnect, useWeb3AuthUser } from "@web3auth/modal/react";
+import {
+  useWeb3AuthConnect,
+  useWeb3AuthDisconnect,
+  useWeb3AuthUser,
+} from "@web3auth/modal/react";
+import { QRScanner } from "./components/BtnScanQR";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -13,13 +18,8 @@ function App() {
     address,
   });
 
+  const { disconnect } = useWeb3AuthDisconnect();
   const { connect } = useWeb3AuthConnect();
-
-  // const {
-  //   disconnect,
-  //   loading: disconnectLoading,
-  //   error: disconnectError,
-  // } = useWeb3AuthDisconnect();
   const { userInfo } = useWeb3AuthUser();
 
   console.log("userInfo", userInfo);
@@ -28,31 +28,21 @@ function App() {
   return (
     <>
       <div>
-        <button onClick={() => connect()} className="card">
+        <button onClick={() => connect()} className="btn-login">
           Login
         </button>
-        {address && <div className="card">Address: {address}</div>}
-        {balance && <div className="card">balance: {balance.value}</div>}
-        <h1>LuckyGift</h1>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        {userInfo && (
+          <button onClick={() => disconnect()} className="btn">
+            Logout
+          </button>
+        )}
+        <img src="/caishen.png" id="caishen" />
+
+        {userInfo && <div className="btn-qr"><QRScanner /></div>}
+
+        {address && <div className="txt">{address}</div>}
+        {/* {balance && <div className="txt">balance: {balance.value}</div>} */}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
