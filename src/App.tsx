@@ -1,7 +1,4 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import { useAccount, useBalance } from "wagmi";
+import { useAccount } from "wagmi";
 import "./App.css";
 
 import {
@@ -12,18 +9,10 @@ import {
 import { QRScanner } from "./components/BtnScanQR";
 
 function App() {
-  const [count, setCount] = useState(0);
   const { address } = useAccount();
-  const { data: balance } = useBalance({
-    address,
-  });
-
   const { disconnect } = useWeb3AuthDisconnect();
   const { connect } = useWeb3AuthConnect();
   const { userInfo } = useWeb3AuthUser();
-
-  console.log("userInfo", userInfo);
-  console.log("address", address);
 
   return (
     <>
@@ -38,7 +27,11 @@ function App() {
         )}
         <img src="/caishen.png" id="caishen" />
 
-        {userInfo && <div className="btn-qr"><QRScanner /></div>}
+        {userInfo && (
+          <div className="btn-qr">
+            <QRScanner />
+          </div>
+        )}
 
         {address && <div className="txt">{address}</div>}
         {/* {balance && <div className="txt">balance: {balance.value}</div>} */}
