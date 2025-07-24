@@ -26,11 +26,12 @@ export const QRScanner = ({ onResult }: Props) => {
             qrbox: { width: 250, height: 250 },
           },
           (decodedText) => {
-            if (/^0x[a-fA-F0-9]{40}$/.test(decodedText)) {
-              onResult(decodedText)
-            } else {
-              alert("❌ Mã không hợp lệ. Vui lòng thử lại.")
-            }
+            onResult(decodedText) // for test
+            // if (/^0x[a-fA-F0-9]{40}$/.test(decodedText)) {
+            //   onResult(decodedText)
+            // } else {
+            //   alert("❌ Mã không hợp lệ. Vui lòng thử lại.")
+            // }
             html5QrCode.stop().then(() => {
               html5QrCode.clear()
             })

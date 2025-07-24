@@ -15,7 +15,6 @@ function App() {
   const { disconnect } = useWeb3AuthDisconnect();
   const { connect } = useWeb3AuthConnect();
   const { userInfo } = useWeb3AuthUser();
-  const [result, setResult] = useState("");
 
   const [addressScan, setAddressScan] = useState<string | null>(null);
 
