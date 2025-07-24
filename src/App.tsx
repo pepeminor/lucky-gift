@@ -1,3 +1,4 @@
+"use client";
 import { useAccount } from "wagmi";
 import "./App.css";
 
@@ -6,13 +7,15 @@ import {
   useWeb3AuthDisconnect,
   useWeb3AuthUser,
 } from "@web3auth/modal/react";
-import { QRScanner } from "./components/BtnScanQR";
+import { QrScanner } from "./components/QRScanner";
+import { useState } from "react";
 
 function App() {
   const { address } = useAccount();
   const { disconnect } = useWeb3AuthDisconnect();
   const { connect } = useWeb3AuthConnect();
   const { userInfo } = useWeb3AuthUser();
+  const [result, setResult] = useState("");
 
   return (
     <>
@@ -28,8 +31,10 @@ function App() {
         <img src="/caishen.png" id="caishen" />
 
         {userInfo && (
-          <div className="btn-qr">
-            <QRScanner />
+          <div>
+            <h1>QR Scanner</h1>
+            <QrScanner onResult={(data) => setResult(data)} />
+            {result && <p>✅ Scanned: {result}</p>}
           </div>
         )}
 
