@@ -7,8 +7,8 @@ import {
   useWeb3AuthDisconnect,
   useWeb3AuthUser,
 } from "@web3auth/modal/react";
-import { QrScanner } from "./components/QRScanner";
 import { useState } from "react";
+import { QRScanner } from "./components/QRScanner";
 
 function App() {
   const { address } = useAccount();
@@ -16,6 +16,8 @@ function App() {
   const { connect } = useWeb3AuthConnect();
   const { userInfo } = useWeb3AuthUser();
   const [result, setResult] = useState("");
+
+  const [addressScan, setAddressScan] = useState<string | null>(null);
 
   return (
     <>
@@ -33,8 +35,13 @@ function App() {
         {userInfo && (
           <div>
             <h1>QR Scanner</h1>
-            <QrScanner onResult={(data) => setResult(data)} />
-            {result && <p>✅ Scanned: {result}</p>}
+            <QRScanner
+              onResult={(addr) => {
+                alert(`✅ Đã scan được ví: ${addr}`);
+                setAddressScan(addr);
+              }}
+            />
+            {addressScan && <p>✅ Scanned: {addressScan}</p>}
           </div>
         )}
 
