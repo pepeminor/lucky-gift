@@ -29,7 +29,7 @@ function App() {
           </button>
         ) : (
           <button onClick={() => connect()} className="btn-login">
-            Logout
+            Login
           </button>
         )}
 

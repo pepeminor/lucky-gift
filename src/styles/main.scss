@@ -60,7 +60,7 @@ body {
   text-decoration: none;
   font-size: 16px;
   position: absolute;
-  top: 90vh;
+  bottom: 4vh;
   left: 10vw;
   z-index: 1000;
   transform: translate(-50%, -50%);
@@ -92,8 +92,8 @@ body {
   text-decoration: none;
   font-size: 16px;
   position: absolute;
-  bottom: 1vh;
-  left: 1vw;
+  bottom: 8vh;
+  left: 50%;
   z-index: 1000;
   transform: translate(-50%, -50%);
   transition: background-color 0.3s ease;
@@ -166,6 +166,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .btn-refresh {
   position: absolute;
   top: 0vh;
