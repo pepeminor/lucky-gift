@@ -1,7 +1,6 @@
-// QRScanButton.tsx
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
 interface QRScanButtonProps {
@@ -18,28 +17,20 @@ export const QRScanButton = ({
   const scannerRef = useRef<Html5Qrcode | null>(null);
   const [scanning, setScanning] = useState(false);
 
-  const isMobile = () => {
-    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  };
+  const isMobile = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  const requestCamera = async () => {
+  const startScanner = async () => {
     try {
-      if (!isMobile()) {
-        alert("Tính năng quét QR chỉ hỗ trợ trên thiết bị di động");
-        return;
-      }
-
       const regionId = "qr-button-region";
       const html5QrCode = new Html5Qrcode(regionId);
       scannerRef.current = html5QrCode;
-      setScanning(true);
 
       const cameras = await Html5Qrcode.getCameras();
       const backCamera =
         cameras.find((cam) => /back|rear|environment/i.test(cam.label)) ||
         cameras[0];
 
-      if (!backCamera) throw new Error("No back camera found");
+      if (!backCamera) throw new Error("Không tìm thấy camera sau");
 
       await html5QrCode.start(
         { deviceId: { exact: backCamera.id } },
@@ -49,12 +40,11 @@ export const QRScanButton = ({
           stopScanner();
         },
         (errorMsg) => {
-          // log scan fail but don't trigger callback
           console.warn("Scan fail:", errorMsg);
         }
       );
     } catch (err) {
-      stopScanner();
+      await stopScanner();
       onError?.(err);
       alert("❌ Không thể mở camera. Vui lòng kiểm tra quyền truy cập.");
     }
@@ -75,19 +65,41 @@ export const QRScanButton = ({
     }
   };
 
+  const handleClick = async () => {
+    if (!isMobile()) {
+      alert("⚠️ Tính năng quét QR chỉ hỗ trợ trên thiết bị di động");
+      return;
+    }
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      stream.getTracks().forEach((track) => track.stop());
+    } catch (err) {
+      alert("❌ Không có quyền mở camera.");
+      return;
+    }
+
+    setScanning(true);
+  };
+
+  useEffect(() => {
+    if (scanning) {
+      const timeout = setTimeout(() => {
+        startScanner();
+      }, 300);
+      return () => clearTimeout(timeout);
+    }
+  }, [scanning]);
+
   return (
     <div>
-      <button
-        className="btn-qr"
-        onClick={() => {
-          if (!scanning) requestCamera();
-        }}
-      >
+      <button className="btn-qr" onClick={handleClick}>
         {buttonText}
       </button>
 
-      {!scanning && (
+      {scanning && (
         <div className="qr-overlay">
+          <button onClick={stopScanner}>✕ Đóng</button>
           <div
             id="qr-button-region"
             style={{ width: 300, margin: "1rem auto" }}

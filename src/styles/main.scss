@@ -121,6 +121,8 @@ body {
 
 /* App.css */
 .qr-overlay {
+  backdrop-filter: 'blur(8px)';
+  background: rgba(0, 0, 0, 0.2);
   position: fixed;
   inset: 0;
   // backdrop-filter: blur(8px);
@@ -128,6 +130,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column-reverse;
 }
 
 .blur {
