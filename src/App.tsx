@@ -29,23 +29,21 @@ function App() {
           </button>
         ) : (
           <button onClick={() => connect()} className="btn-login">
-            Login
+            Logout
           </button>
         )}
 
         {userInfo && (
-          
-            <QRScanButton
-              onSuccess={(address) => {
-                console.log("Scanned address:", address);
-                // Làm gì đó...
-                setAddressScan(address);
-              }}
-              onError={(err) => {
-                console.error("Lỗi QR:", err);
-              }}
-            />
-
+          <QRScanButton
+            onSuccess={(address) => {
+              console.log("Scanned address:", address);
+              // Làm gì đó...
+              setAddressScan(address);
+            }}
+            onError={(err) => {
+              console.error("Lỗi QR:", err);
+            }}
+          />
         )}
 
         {addressScan && (
@@ -54,6 +52,14 @@ function App() {
             <div className="txt">{addressScan}</div>
           </div>
         )}
+
+        <button
+          className="btn-refresh"
+          onClick={() => window.location.reload()}
+          style={{ marginTop: "1rem", fontSize: '1.2rem' }}
+        >
+          🔄
+        </button>
 
         {address && <div className="txt">{address}</div>}
         {/* {balance && <div className="txt">balance: {balance.value}</div>} */}

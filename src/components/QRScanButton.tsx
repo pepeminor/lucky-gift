@@ -12,7 +12,7 @@ interface QRScanButtonProps {
 export const QRScanButton = ({
   onSuccess,
   onError,
-  buttonText = "📷 Quét QR",
+  buttonText = "📷 Scan QR",
 }: QRScanButtonProps) => {
   const scannerRef = useRef<Html5Qrcode | null>(null);
   const [scanning, setScanning] = useState(false);
@@ -93,13 +93,13 @@ export const QRScanButton = ({
 
   return (
     <div>
-      <button className="btn-qr" onClick={handleClick}>
+      <div className="btn-qr" onClick={handleClick}>
         {buttonText}
-      </button>
+      </div>
 
       {scanning && (
         <div className="qr-overlay">
-          <button onClick={stopScanner}>✕ Đóng</button>
+          <button onClick={stopScanner}>✕ Close</button>
           <div
             id="qr-button-region"
             style={{ width: 300, margin: "1rem auto" }}

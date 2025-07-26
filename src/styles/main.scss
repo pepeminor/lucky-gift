@@ -1,3 +1,5 @@
+// ⚙️
+
 @mixin safe-area {
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -51,7 +53,7 @@ body {
 
 .btn-logout {
   display: inline-block;
-  padding: 10px 34px;
+  padding: 10px;
   background-color: #036428;
   color: white;
   border-radius: 5px;
@@ -66,14 +68,19 @@ body {
 }
 
 .btn-qr {
+  cursor: pointer;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
   position: absolute;
-  top: 90vh;
+  bottom: 8vh;
   left: 50%;
+  padding: 10px;
+  border-radius: 8px;
   z-index: 1000;
+  color: #036428;
   transform: translate(-50%, -50%);
   transition: background-color 0.3s ease;
+  background-color: white;
 }
 
 .btn-login {
@@ -85,14 +92,15 @@ body {
   text-decoration: none;
   font-size: 16px;
   position: absolute;
-  top: 90vh;
-  left: 50%;
+  bottom: 1vh;
+  left: 1vw;
   z-index: 1000;
   transform: translate(-50%, -50%);
   transition: background-color 0.3s ease;
 }
 
 .txt {
+  word-wrap: break-word;
   color: #fff;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   font-size: 16px;
@@ -104,7 +112,6 @@ body {
   transform: translate(-50%, -50%);
   z-index: 1000;
 }
-
 
 .txt-address {
   color: #fff;
@@ -121,7 +128,7 @@ body {
 
 /* App.css */
 .qr-overlay {
-  backdrop-filter: 'blur(8px)';
+  backdrop-filter: "blur(8px)";
   background: rgba(0, 0, 0, 0.2);
   position: fixed;
   inset: 0;
@@ -158,4 +165,16 @@ body {
   top: 42vh;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.btn-refresh {
+  position: absolute;
+  top: 0vh;
+  right: 1vw;
+  border: none;
+  background: transparent;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
 }
