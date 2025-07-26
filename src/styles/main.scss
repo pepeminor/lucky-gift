@@ -14,7 +14,7 @@ body {
 #background-lucky {
   position: relative;
   margin: 0;
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
   overflow: hidden;
   background: url("/background-lucky-400x600.png") no-repeat center center /
@@ -30,6 +30,7 @@ body {
   max-width: 1024px;
   height: auto;
   max-height: 1536px;
+  z-index: 1;
 }
 
 .btn {
@@ -41,26 +42,39 @@ body {
   text-decoration: none;
   font-size: 16px;
   position: absolute;
-  top: 88%;
+  top: 90vh;
   left: 50%;
   z-index: 1000;
   transform: translate(-50%, -50%);
   transition: background-color 0.3s ease;
 }
 
+.btn-logout {
+  display: inline-block;
+  padding: 10px 34px;
+  background-color: #036428;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  position: absolute;
+  top: 90vh;
+  left: 10vw;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.3s ease;
+}
 
 .btn-qr {
   text-decoration: none;
   font-size: 16px;
   position: absolute;
-  top: 90%;
+  top: 90vh;
   left: 50%;
   z-index: 1000;
   transform: translate(-50%, -50%);
   transition: background-color 0.3s ease;
 }
-
-
 
 .btn-login {
   display: inline-block;
@@ -71,23 +85,74 @@ body {
   text-decoration: none;
   font-size: 16px;
   position: absolute;
-  top: 90%;
+  top: 90vh;
   left: 50%;
   z-index: 1000;
   transform: translate(-50%, -50%);
   transition: background-color 0.3s ease;
 }
 
-
 .txt {
   color: #fff;
-  text-shadow:1px 1px 2px rgba(0, 0, 0, 0.8);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   font-size: 16px;
   text-align: center;
   position: absolute;
-  top: 14%;
+  top: 10vh;
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
   z-index: 1000;
+}
+
+
+.txt-address {
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+  text-align: center;
+  position: absolute;
+  top: 14vh;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+/* App.css */
+.qr-overlay {
+  position: fixed;
+  inset: 0;
+  // backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blur {
+  backdrop-filter: blur(8px);
+}
+
+.qr-close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.qr-wrap {
+  width: 250px;
+  height: 250px;
+  margin: 0px auto;
+  position: absolute !important;
+  top: 42vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

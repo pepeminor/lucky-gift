@@ -8,7 +8,7 @@ import {
   useWeb3AuthUser,
 } from "@web3auth/modal/react";
 import { useState } from "react";
-import { QRScanner } from "./components/QRScanner";
+import { QRScanButton } from "./components/QRScanButton";
 
 function App() {
   const { address } = useAccount();
@@ -21,26 +21,37 @@ function App() {
   return (
     <>
       <div>
-        <button onClick={() => connect()} className="btn-login">
-          Login
-        </button>
-        {userInfo && (
-          <button onClick={() => disconnect()} className="btn">
-            Logout
-          </button>
-        )}
         <img src="/caishen.png" id="caishen" />
 
+        {userInfo ? (
+          <button onClick={() => disconnect()} className="btn-logout">
+            Logout
+          </button>
+        ) : (
+          <button onClick={() => connect()} className="btn-login">
+            Login
+          </button>
+        )}
+
         {userInfo && (
-          <div>
-            <h1>QR Scanner</h1>
-            <QRScanner
-              onResult={(addr) => {
-                alert(`✅ Đã scan được ví: ${addr}`);
-                setAddressScan(addr);
+          
+            <QRScanButton
+              onSuccess={(address) => {
+                console.log("Scanned address:", address);
+                // Làm gì đó...
+                setAddressScan(address);
+              }}
+              onError={(err) => {
+                console.error("Lỗi QR:", err);
               }}
             />
-            {addressScan && <p>✅ Scanned: {addressScan}</p>}
+
+        )}
+
+        {addressScan && (
+          <div className="address-scan">
+            <h3>Địa chỉ ví đã quét:</h3>
+            <div className="txt">{addressScan}</div>
           </div>
         )}
 
